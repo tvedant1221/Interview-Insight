@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interview Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Interview Summary</h2>
+        <p><strong>Facial Expression Analysis:</strong> {{ facial_expression_score }}%</p>
+        <p><strong>Grammar Analysis:</strong> {{ grammar_score }}%</p>
+        <p><strong>Speech Feedback:</strong> {{ speech_feedback_score }}%</p>
+        <p><strong>Keyword Analysis:</strong> {{ keyword_score }}%</p>
+        <p><strong>Overall Score:</strong> {{ overall_score }}%</p>
+    </div>
+</body>
+</html>

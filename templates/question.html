@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Insight - Question</title>
+</head>
+<body>
+    <h1 id="question">Loading question...</h1>
+    <input type="text" id="answer" placeholder="Speak your answer here...">
+    <button onclick="submitAnswer()">Submit Answer</button>
+
+    <script>
+        let questionIndex = 0;
+
+        // Function to load question based on current index
+        function loadQuestion() {
+            fetch(`/get-question/${questionIndex}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "Interview completed") {
+                        window.location.href = "/result";
+                    } else {
+                        document.getElementById("question").innerText = data.question;
+                    }
+                })
+                .catch(error => console.error("Error fetching question:", error));
+        }
+
+        // Load initial question
+        loadQuestion();
+
+        // Set interval to load next question every 45 seconds
+        setInterval(() => {
+            questionIndex++;
+            loadQuestion();
+        }, 45000); // 45000 ms = 45 seconds
+
+        // Function to submit answer
+        function submitAnswer() {
+            const answer = document.getElementById("answer").value;
+            fetch("/process-answer", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ index: questionIndex, answer: answer })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log("Answer Rating:", data.rating);
+                // Clear the answer field for the next question
+                document.getElementById("answer").value = "";
+            })
+            .catch(error => console.error("Error submitting answer:", error));
+        }
+    </script>
+</body>
+</html>

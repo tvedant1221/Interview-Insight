@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Insight</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Interview Insight</h1>
+        
+        <div class="card">
+            <video id="cameraFeed" autoplay playsinline></video>
+            <h2 id="questionText">Loading question...</h2>
+            
+            <div class="controls">
+                <button id="speakQuestion">Read Question Aloud</button>
+                <button id="repeatQuestion">Repeat Question</button>
+                <button id="nextQuestion">Next Question</button>
+            </div>
+
+            <div class="timer-rating">
+                <span id="timer">45s</span>
+                <span id="ratingScore">Rating: --%</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
